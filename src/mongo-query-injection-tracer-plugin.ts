@@ -18,7 +18,7 @@ export function mongoQueryInjectionTracerPlugin(options: mongoQueryInjectionTrac
             "findOneAndUpdate",
             "update",
             "updateOne",
-            "updateMany"
+            "updateMany",
         ] as const;
         const traverser = createTraverser();
         const queryChecker = (query: {}) => {
@@ -26,14 +26,20 @@ export function mongoQueryInjectionTracerPlugin(options: mongoQueryInjectionTrac
                 enter({ node, prop }) {
                     Object.entries(node).forEach(([key, value]) => {
                         if (key === keyName || value === keyName) {
-                            logger.trace(`${JSON.stringify(query, null, 4)} includes ${keyName} @ ${prop}`);
+                            logger.trace(
+                                `[mongo-query-injection-tracer-plugin] ${JSON.stringify(
+                                    query,
+                                    null,
+                                    4
+                                )} includes ${keyName} @ ${prop}`
+                            );
                         }
                     });
-                }
+                },
             });
         };
-        method.forEach(method => {
-            schema.pre(method, function() {
+        method.forEach((method) => {
+            schema.pre(method, function () {
                 const query = this.getQuery();
                 queryChecker(query);
             });
