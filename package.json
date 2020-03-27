@@ -1,0 +1,73 @@
+{
+  "name": "mongo-query-injection-tracer-plugin",
+  "version": "0.0.1",
+  "description": "",
+  "keywords": [
+    "node",
+    "mongo",
+    "mongoose"
+  ],
+  "homepage": "https://github.com/azu/mongo-query-injection-tracer-plugin/tree/master/",
+  "bugs": {
+    "url": "https://github.com/azu/mongo-query-injection-tracer-plugin/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/azu/mongo-query-injection-tracer-plugin.git"
+  },
+  "license": "MIT",
+  "author": "azu",
+  "files": [
+    "bin/",
+    "lib/",
+    "src/"
+  ],
+  "main": "lib/mongo-query-injection-tracer-plugin.js",
+  "types": "lib/mongo-query-injection-tracer-plugin.d.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "build": "cross-env NODE_ENV=production tsc -p .",
+    "clean": "rimraf lib/",
+    "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,css}\"",
+    "prepublish": "npm run --if-present build",
+    "test": "mocha \"test/**/*.ts\"",
+    "watch": "tsc -p . --watch"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,css}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "prettier": {
+    "printWidth": 120,
+    "singleQuote": false,
+    "tabWidth": 4
+  },
+  "devDependencies": {
+    "@types/mocha": "^7.0.2",
+    "@types/mongoose": "^5.7.7",
+    "@types/node": "^12.12.31",
+    "cross-env": "^7.0.2",
+    "husky": "^4.2.3",
+    "lint-staged": "^10.0.9",
+    "mocha": "^7.1.1",
+    "mongoose": "^5.9.6",
+    "prettier": "^2.0.2",
+    "rimraf": "^3.0.2",
+    "ts-node": "^8.8.1",
+    "ts-node-test-register": "^8.0.1",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "@deps/traverse": "^1.0.2"
+  }
+}
