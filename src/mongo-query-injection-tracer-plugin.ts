@@ -2,13 +2,13 @@ import type { Schema } from "mongoose";
 import { createTraverser } from "@deps/traverse";
 
 export type mongoQueryInjectionTracerPluginOptions = {
-    keyName: "sqlinjectiontest";
+    keyName?: string;
     logger?: Console;
 };
 
-export function mongoQueryInjectionTracerPlugin(options: mongoQueryInjectionTracerPluginOptions) {
-    const keyName = options.keyName;
-    const logger = options.logger ?? console;
+export function mongoQueryInjectionTracerPlugin(options?: mongoQueryInjectionTracerPluginOptions) {
+    const keyName = options?.keyName ?? "sqlinjectiontest";
+    const logger = options?.logger ?? console;
     return (schema: Schema) => {
         const method = [
             "count",
